@@ -1,0 +1,5 @@
+ORDR:Ref1,DocTime,UpdateTS,DocDate,U_SOH_SO,U_SOH_UDT,U_SOH_UDO,U_SOH_UDO_Doc,U_SOH_Advanced_Not
+OCLG:BeginTime,ENDTime
+RDR1:U_SOR_SO,U_SOR_UDT,U_SOR_UDO_Tax,U_SOR_Percent,U_SOR_Advanced_Length2
+OUTX:SrcObjAbs
+OCRD:CardCode,CardName
