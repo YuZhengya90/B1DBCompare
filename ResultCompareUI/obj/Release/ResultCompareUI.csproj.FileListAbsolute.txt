@@ -1,0 +1,15 @@
+D:\DB2JSON\DB2JSON\ResultCompareUI\bin\Release\ResultCompareUI.exe.config
+D:\DB2JSON\DB2JSON\ResultCompareUI\bin\Release\ResultCompareUI.exe
+D:\DB2JSON\DB2JSON\ResultCompareUI\bin\Release\ResultCompareUI.pdb
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.ConfigurationForm.resources
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.HelpForm.resources
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.MainForm.resources
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.Properties.Resources.resources
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.UDFCompareForm.resources
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.csproj.GenerateResource.Cache
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.exe
+D:\DB2JSON\DB2JSON\ResultCompareUI\obj\Release\ResultCompareUI.pdb
+D:\B1DBCompare\ResultCompareUI\bin\Release\ResultCompareUI.exe.config
+D:\B1DBCompare\ResultCompareUI\obj\Release\ResultCompareUI.exe
+D:\B1DBCompare\ResultCompareUI\obj\Release\ResultCompareUI.pdb
+D:\B1DBCompare\Output.86\ResultCompareUI.exe.config

@@ -1,0 +1,1 @@
+AbsEntry,LineNum,SnBIndex,ItemCode,WhsCode,ObjId,ObjAbs,DrfWObjAbs,Quantity,SubLineNum,ObjType,LogInstanc

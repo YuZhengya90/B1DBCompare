@@ -1,0 +1,1 @@
+DocEntry,LineNum,AssetCode,Status,Remarks,Amount,AmountSC,SerialNo,VisOrder,LogInstanc,ObjectType

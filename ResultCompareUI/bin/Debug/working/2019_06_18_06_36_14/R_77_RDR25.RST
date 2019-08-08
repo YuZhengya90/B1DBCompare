@@ -1,0 +1,1 @@
+DocEntry,VatGroup,VatPrcnt,BaseAmnt,BaseAmntFC,BaseAmntSC,VatSum,VatSumFrgn,VatSumSy,Type,Currency,Rate,LogInstanc,ObjType

@@ -1,0 +1,1 @@
+DocEntry,SuplyType,SubSplyTyp,DocType,TransMode,Distance,TransDocNo,TransDate,VehicleTyp,VehicleNo,EWayBillNo,EwbDate,FrmTraName,FrmAddres1,FrmAddres2,FrmZipCode,ActFrmStat,ToTraName,ToAddres1,ToAddres2,ToZipCode,ActToState,FrmGSTN,FrmState,ToGSTN,ToState,MainHsnEnt,FrmPlace,ToPlace,TransID,TransName,ExpireDate,ObjectType,LogInstanc,TspEntry,TspLine,TransType

@@ -1,0 +1,1 @@
+DocEntry,LineNum,BaseAbs,BaseLine,TargetBase,ObjType,DrawnSum,DrawnSumFc,DrawnSumSc,LogInstanc,ObjCode,ApplDrawn,ApplDrawnF,ApplDrawnS,BaseDocNum,BsDocDate,BsDueDate,BsCardName,BsComments,Posted,Vat,VatFc,VatSc,Gross,GrossFc,GrossSc,IsGross

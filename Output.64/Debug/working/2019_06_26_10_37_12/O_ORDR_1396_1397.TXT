@@ -1,0 +1,3 @@
+DocEntry;Comments,DataSource,Notify,UseBilAddr,U_SOH_SO,U_SOH_UDT,U_SOH_UDO,U_SOH_UDO_Doc,U_SOH_Advanced_Not,
+    1396;      "",       "W",     ?,         ?,      "",       "",       "",           "",                "",
+    1397;       ?,       "I",   "Y",       "N",       ?,        ?,        ?,            ?,                 ?,

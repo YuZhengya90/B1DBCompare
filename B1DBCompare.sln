@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DBCompare", "DBCompare\DBCompare.vcxproj", "{8F8F4104-9F44-4B18-94C9-5466B38A291B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultCompareUI", "ResultCompareUI\ResultCompareUI.csproj", "{A2003A41-7A6F-4EA6-9994-4298C942EB35}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B} = {8F8F4104-9F44-4B18-94C9-5466B38A291B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Debug|x64.ActiveCfg = Debug|x64
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Debug|x64.Build.0 = Debug|x64
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Debug|x86.ActiveCfg = Debug|Win32
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Debug|x86.Build.0 = Debug|Win32
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Release|x64.ActiveCfg = Release|x64
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Release|x64.Build.0 = Release|x64
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Release|x86.ActiveCfg = Release|Win32
+		{8F8F4104-9F44-4B18-94C9-5466B38A291B}.Release|x86.Build.0 = Release|Win32
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Debug|x64.ActiveCfg = Debug|x64
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Debug|x64.Build.0 = Debug|x64
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Debug|x86.ActiveCfg = Debug|x86
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Debug|x86.Build.0 = Debug|x86
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Release|x64.ActiveCfg = Release|x64
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Release|x64.Build.0 = Release|x64
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Release|x86.ActiveCfg = Release|x86
+		{A2003A41-7A6F-4EA6-9994-4298C942EB35}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

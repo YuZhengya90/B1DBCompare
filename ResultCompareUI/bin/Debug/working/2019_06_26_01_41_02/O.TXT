@@ -1,0 +1,1 @@
+;DocEntry,BaseRef,                       ShipDate,VendorNum,                        DocDate,SubCatNum,Project,SWW,Address,OrigItem,FreeTxt,LineVendor,CmpltTimes,

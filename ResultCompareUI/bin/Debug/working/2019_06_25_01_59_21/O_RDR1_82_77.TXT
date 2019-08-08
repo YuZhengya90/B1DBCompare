@@ -1,0 +1,3 @@
+DocEntry,LineNum;BaseRef,                       ShipDate,VendorNum,                        DocDate,SubCatNum,Project,SWW,Address,OrigItem,FreeTxt,LineVendor,CmpltTimes,
+      82,      0;     "","2019-07-02 00:00:00.000000000",       "","2019-06-12 00:00:00.000000000",       "",     "", "",     "",   "AAA",     "",        "",         3,
+      77,      0;      ?,"2019-06-11 00:00:00.000000000",        ?,"2019-06-11 00:00:00.000000000",        ?,      ?,  ?,      ?,       ?,      ?,         ?,         1,

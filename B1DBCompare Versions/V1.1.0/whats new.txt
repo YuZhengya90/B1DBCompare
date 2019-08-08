@@ -1,0 +1,5 @@
+1.Provide "DocNum" for Sales Order.
+2.Provide User added BO manually by editing (adding lines) in .\config\querybox.txt
+3.Provide shortcut key operation.
+4.Provide table copy and screen snapshot to clipboard/image file.
+5.Fix known bugs.
