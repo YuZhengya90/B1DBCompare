@@ -1,0 +1,9 @@
+# intermediate files
+*.sdf
+*.suo
+*.opensdf
+*.user
+*.o
+*.obj
+/Output.64/*
+/Output.86/*
