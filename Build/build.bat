@@ -5,13 +5,10 @@ set workingDir=%cd%
 
 for /f "delims=[" %%i in (vspath.txt) do set vsPath=%%i
 
-C:
-cd %vsPath%
-devenv %workingDir%\..\B1DBCompare.sln /ReBuild "Release|X64"
-devenv %workingDir%\..\B1DBCompare.sln /ReBuild "Release|X86"
-D:
-cd ..\Output.64
+"%vsPath%\\devenv.exe" %workingDir%\..\B1DBCompare.sln /ReBuild "Release|X64"
+"%vsPath%\\devenv.exe" %workingDir%\..\B1DBCompare.sln /ReBuild "Release|X86"
 
+cd ..\Output.64
 ..\Tools\rar.exe a -r B1_DB_Compare_V%version%_X64.zip Release
 cd ..\Output.86
 ..\Tools\rar.exe a -r B1_DB_Compare_V%version%_X86.zip Release
