@@ -1,1 +1,0 @@
-DocEntry,LineNum,LogInstanc,ObjectType,ImpDocType,ImpDocNum,DateOfReg,CustClrDat,ConcActNum,AdditNum,AddItmDV,tpVTransp

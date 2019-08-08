@@ -1,1 +1,0 @@
-set Schema "SBODEMOUS";select * from UTX1 where "AbsEntry" = (select "AbsEntry" from OUTX where "SrcObjType" = 17 and "SrcObjAbs" = (select "DocEntry" from ORDR where "DocNum" = ('1'))) Order By "LineSeq"; 

@@ -1,3 +1,0 @@
-LineNum;BaseRef,VendorNum,SubCatNum,OcrCode,VatGroup,SWW,PoTrgEntry,FreeTxt,LineVendor,ReturnAct,CmpltTimes,
-      0;     "",       "",       "",      ?,    "PA", "",        "",     "",        "",        1,         0,
-      0;      ?,        ?,        ?,     "",       ?,  ?,         ?,      ?,         ?,       -1,         1,

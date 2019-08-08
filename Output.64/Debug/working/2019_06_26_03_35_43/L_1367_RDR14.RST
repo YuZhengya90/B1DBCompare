@@ -1,1 +1,0 @@
-DocEntry,LineNum,ChildNum,ItemCode,WhsCode,Quantity,TotalQty,OpenQty,ObjectType,LogInstanc,BaseChildN,EncryptIV

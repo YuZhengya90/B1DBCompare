@@ -1,1 +1,0 @@
-set Schema "SBODEMOUS";select * from RDR1 where "DocEntry" = (select "DocEntry" from ORDR where "DocNum" = ('355')) Order By "LineNum"; 

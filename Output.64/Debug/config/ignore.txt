@@ -1,2 +1,0 @@
-ORDR:DocEntry,DocNum,Ref1,CreateTS,DocTime,UpdateTS,DocDate
-OCLG:BeginTime,ENDTime

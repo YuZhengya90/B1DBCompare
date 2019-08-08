@@ -1,5 +1,0 @@
-1.Enable Save multi-configuration to file.
-2.Enable Create New Configuration and Delete Configuration.
-
---NOTES--
-It has a bug that can't change the DB Client file path. (for x64 version to be a disaster.)

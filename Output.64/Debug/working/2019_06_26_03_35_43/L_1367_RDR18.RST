@@ -1,1 +1,0 @@
-DocEntry,LineNum,LogInstanc,ObjectType,ExpDocType,ExpDeclNum,ExpDeclDat,ExpNature,ExpRegNum,ExpRegDate,LadBillNum,LadBillDat,MerchLeftD,LadBillTyp

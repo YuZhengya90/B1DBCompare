@@ -1,1 +1,0 @@
-DocEntry,ExpnsCode,TotalLC,TotalFC,TotalSC,DistribM,DrawnLC,DrawnFC,DrawnSC,LineNum,BaseAbsEnt,BaseType,BaseRef,BaseLnNum,LogInstanc,ObjectType,FixCurr
