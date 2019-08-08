@@ -6,8 +6,11 @@
 *.o
 *.obj
 /Output.64/*
+!/Output.64
 /Output.86/*
+!/Output.86
 /B1DBCompare Versions/*
+!/B1DBCompare Versions
 /.vs/*
 /.vs/B1DBCompare/v15/*
 *.tlog
