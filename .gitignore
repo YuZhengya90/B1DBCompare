@@ -6,7 +6,13 @@
 *.o
 *.obj
 /Output.64/*
+!/Output.64/Release/config/*
+!/Output.64/Release/working/*
+!/Output.64/Release/help/*
 /Output.86/*
+!/Output.86/Release/config/*
+!/Output.86/Release/working/*
+!/Output.86/Release/help/*
 /B1DBCompare Versions/*
 /.vs/*
 /.vs/B1DBCompare/v15/*
