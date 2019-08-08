@@ -1,3 +1,0 @@
-DocEntry,InstlmntID;DocEntry,   InsTotal, InsTotalSy,
-      91,         1;      91,1008.000000,1008.000000,
-      92,         1;      92, 900.000000, 900.000000,

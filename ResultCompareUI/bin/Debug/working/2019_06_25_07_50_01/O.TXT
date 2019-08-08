@@ -1,1 +1,0 @@
-;DocEntry,DocNum,                        DocDate,                     DocDueDate,Ref1,DocTime,  CntctCode,                     UpdateDate,                     CreateDate,                        TaxDate,StationID,   Max1099,        BuildDesc,CreateTS,UpdateTS,

@@ -1,1 +1,0 @@
-DocEntry,BinAllocSe,LineNum,SubLineNum,SnBType,SnBMDAbs,BinAbs,Quantity,ItemCode,WhsCode,ObjType,LogInstanc,AllowNeg,BinActTyp

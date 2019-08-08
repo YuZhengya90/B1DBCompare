@@ -1,3 +1,0 @@
-DocEntry;DocEntry,
-      82;      82,
-      77;      77,

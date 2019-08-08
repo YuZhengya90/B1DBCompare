@@ -1,1 +1,0 @@
-DocEntry,ObjectType,LogInstanc,RefType,LineNum,RefDocEntr,RefDocNum,ExtDocNum,RefObjType,AccessKey,IssueDate,IssuerCNPJ,IssuerCode,Model,Series,Number,RefAccKey,RefAmount,SubSeries,Remark,LinkRefTyp
