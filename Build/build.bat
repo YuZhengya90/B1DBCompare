@@ -19,4 +19,5 @@ copy ..\Output.64\B1_DB_Compare_V%version%_X64.zip V%version%
 copy ..\Output.86\B1_DB_Compare_V%version%_X86.zip V%version%
 cd V%version%
 echo README (VERSION_%version%) > "whats new.txt"
+echo Build Successfully....
 pause
