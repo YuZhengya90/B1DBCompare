@@ -225,6 +225,11 @@ namespace ResultCompareUI
             return configurationConnectionTimeout.ToString();
         }
 
+        public ConfigurationDBType GetDBType()
+        {
+            return configurationDBType;
+        }
+
         public void ReadFromConfigFileString(string content)
         {
             List<string> lines = content.Split(';').ToList();

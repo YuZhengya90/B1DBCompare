@@ -68,7 +68,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>20190626074958573_easyicon_net_96.ico</ApplicationIcon>
+    <ApplicationIcon>ui.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,45 +83,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="CompareResult.cs" />
-    <Compile Include="ConfigForm.cs">
+    <Compile Include="Component\Command.cs" />
+    <Compile Include="Component\CompareResult.cs" />
+    <Compile Include="Component\CompareFileGen.cs" />
+    <Compile Include="Form\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigForm.Designer.cs">
+    <Compile Include="Form\ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConfigurationStruct.cs" />
-    <Compile Include="ConstTableRelation.cs" />
-    <Compile Include="HelpForm.cs">
+    <Compile Include="Component\ConfigurationStruct.cs" />
+    <Compile Include="Component\ConstTableRelation.cs" />
+    <Compile Include="Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelpForm.Designer.cs">
+    <Compile Include="Form\HelpForm.Designer.cs">
       <DependentUpon>HelpForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IgnoreAlready.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Component\IgnoreAlready.cs" />
+    <Compile Include="Form\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Form\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Component\MSRstConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryBox.cs" />
-    <Compile Include="UDFForm.cs">
+    <Compile Include="Component\QueryBox.cs" />
+    <Compile Include="Form\UDFForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UDFForm.Designer.cs">
+    <Compile Include="Form\UDFForm.Designer.cs">
       <DependentUpon>UDFForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ConfigForm.resx">
+    <EmbeddedResource Include="Form\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelpForm.resx">
+    <EmbeddedResource Include="Form\HelpForm.resx">
       <DependentUpon>HelpForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -134,7 +136,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UDFForm.resx">
+    <EmbeddedResource Include="Form\UDFForm.resx">
       <DependentUpon>UDFForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -168,7 +170,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="20190626074958573_easyicon_net_96.ico" />
+    <Content Include="ui.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

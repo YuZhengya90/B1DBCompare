@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResultCompareUI.Component;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,7 +56,7 @@ namespace ResultCompareUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            QueryBox.Init();
+            QueryBox.Init(ConfigurationDBType.C_HANA);
             InitBusinessObjectComboBox();
             InitBusinessObjectSubTable();
             InitIgnoreListFilePath();
@@ -161,7 +162,7 @@ namespace ResultCompareUI
             return createFolderPathName + "\\O_.TXT";
         }
 
-        private void CreateSqlFiles()
+        private void CreateSqlFiles_HANA()
         {
             // order by xxx;
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
@@ -184,7 +185,30 @@ namespace ResultCompareUI
             }
         }
 
-        private void CreateSqlFilesByManualQuery()
+        private void CreateSqlFiles_MSSQL()
+        {
+            // order by xxx;
+            for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
+            {
+                string exeCmdL = "echo " + 
+                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
+
+                exeCmdL += " > \"" + getLeftSqlFilePathName(i) + "\"";
+                Command.Cmd(exeCmdL, mLBLog);
+
+                mProgBar.Value += 1;
+
+                string exeCmdR = "echo " + 
+                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
+
+                exeCmdR += " > \"" + getRightSqlFilePathName(i) + "\"";
+                Command.Cmd(exeCmdR, mLBLog);
+
+                mProgBar.Value += 1;
+            }
+        }
+
+        private void CreateSqlFilesByManualQuery_HANA()
         {
             string exeCmdL = "echo set Schema \"" + ConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery1;
             exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
@@ -197,7 +221,20 @@ namespace ResultCompareUI
             mProgBar.Value += 1;
         }
 
-        private void RetrieveSqlResult()
+        private void CreateSqlFilesByManualQuery_MSSQL()
+        {
+            string exeCmdL = "echo " + udfCompareQuery1;
+            exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
+            Command.Cmd(exeCmdL, mLBLog);
+            mProgBar.Value += 1;
+
+            string exeCmdR = "echo " + udfCompareQuery2;
+            exeCmdR += " > \"" + getRightSqlFilePathName() + "\"";
+            Command.Cmd(exeCmdR, mLBLog);
+            mProgBar.Value += 1;
+        }
+
+        private void RetrieveSqlResult_HANA()
         {
             string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
@@ -220,9 +257,34 @@ namespace ResultCompareUI
             }
         }
 
-        private void RetrieveSqlResultByManualQuery()
+        private void RetrieveSqlResult_MSSQL()
         {
-            const string hdbsql = "\"C:\\Program Files (x86)\\SAP\\hdbclient\\hdbsql.exe\"";
+            string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
+            for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
+            {
+                string exeCmdL = hdbsql + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName(i) + "\"" +
+                    " -o " + "\"" + getLeftRetrieveFileName(i) + "\"" +
+                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() +
+                    " -k2 ";
+                Command.Cmd(exeCmdL, mLBLog);
+
+                mProgBar.Value += 1;
+
+                string exeCmdR = hdbsql + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName(i) + "\"" +
+                    " -o " + "\"" + getRightRetrieveFileName(i) + "\"" +
+                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() +
+                    " -k2 ";
+                Command.Cmd(exeCmdR, mLBLog);
+
+                mProgBar.Value += 1;
+            }
+        }
+
+        private void RetrieveSqlResultByManualQuery_HANA()
+        {
+            string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
             string exeCmdL = hdbsql + " -n " + ConfigurationList.GetCurrent().GetIPPort() + " -u " + ConfigurationList.GetCurrent().GetUserName() +
                     " -p " + ConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName() + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
@@ -238,6 +300,37 @@ namespace ResultCompareUI
             Command.Cmd(exeCmdR, mLBLog);
 
             mProgBar.Value += 1;
+        }
+
+        private void RetrieveSqlResultByManualQuery_MSSQL()
+        {
+            string sqlcmd = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
+            string exeCmdL = sqlcmd + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName() + "\"" +
+                    " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
+                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() + 
+                    " -k2 ";
+            Command.Cmd(exeCmdL, mLBLog);
+
+            mProgBar.Value += 1;
+
+            string exeCmdR = sqlcmd + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName() + "\"" +
+                    " -o " + "\"" + getRightRetrieveFileName() + "\"" +
+                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() + 
+                    " -k2 ";
+            Command.Cmd(exeCmdR, mLBLog);
+
+            mProgBar.Value += 1;
+        }
+
+        private void ConvertRSTFiles_MSSQL()
+        {
+            var files = Directory.GetFiles(createFolderPathName, "*.RST");
+            foreach(var file in files)
+            {
+                MSRstConverter.Convert(file);
+            }
         }
 
         private Dictionary<string, string> ReadIgnoreFile()
@@ -283,23 +376,38 @@ namespace ResultCompareUI
 
                 try
                 {
-                    string exeCmd = "DBCompare compare" +
-                   " -l " + "\"" + getLeftRetrieveFileName(i) + "\"" +
-                   " -r " + "\"" + getRightRetrieveFileName(i) + "\"" +
-                   " -o " + "\"" + getCompareResultFileName(i) + "\"";
+                   // string exeCmd = "DBCompare compare" +
+                   //" -l " + "\"" + getLeftRetrieveFileName(i) + "\"" +
+                   //" -r " + "\"" + getRightRetrieveFileName(i) + "\"" +
+                   //" -o " + "\"" + getCompareResultFileName(i) + "\"";
 
-                    string tableKeyOrder = QueryBox.GetTableKeyOrderByBOTable(mCBBO.Text, tableName);
-                    if (tableKeyOrder != null)
-                    {
-                        exeCmd += " -k " + tableKeyOrder;
-                    }
+                   // string tableKeyOrder = QueryBox.GetTableKeyOrderByBOTable(mCBBO.Text, tableName);
+                   // if (tableKeyOrder != null)
+                   // {
+                   //     exeCmd += " -k " + tableKeyOrder;
+                   // }
 
+                   // if (ignoreFiles.ContainsKey(tableName))
+                   // {
+                   //     exeCmd += " -I " + ignoreFiles[tableName] + IgnoreAlready.GetByTable(tableName);
+                   // }
+
+                   // Command.Cmd(exeCmd, mLBLog);
+
+                    string ignoreStr = "";
                     if (ignoreFiles.ContainsKey(tableName))
                     {
-                        exeCmd += " -I " + ignoreFiles[tableName] + IgnoreAlready.GetByTable(tableName);
+                        ignoreStr += ignoreFiles[tableName] + IgnoreAlready.GetByTable(tableName);
                     }
 
-                    Command.Cmd(exeCmd, mLBLog);
+                    CompareFileGen cFileGen = new CompareFileGen();
+                    cFileGen.GenerateOFile(
+                        getLeftRetrieveFileName(i),
+                        getRightRetrieveFileName(i),
+                        ignoreStr,
+                        QueryBox.GetTableKeyOrderByBOTable(mCBBO.Text, tableName),
+                        getCompareResultFileName(i)
+                        );
                 }
                 catch(Exception ex)
                 {
@@ -322,16 +430,45 @@ namespace ResultCompareUI
         public void DBCompareCombination()
         {
             CreateClickFolder();
-            CreateSqlFiles();
-            RetrieveSqlResult();
+            if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
+            {
+                CreateSqlFiles_HANA();
+                RetrieveSqlResult_HANA();
+            }
+            else if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
+            {
+                CreateSqlFiles_MSSQL();
+                RetrieveSqlResult_MSSQL();
+                ConvertRSTFiles_MSSQL();
+            }
+            else
+            {
+                mLBLog.Items.Add("Invalid DB Type");
+                return;
+            }
+            
             CompareSqlResult();
         }
 
         public void DBCompareCombinationAdvanced()
         {
             CreateClickFolder();
-            CreateSqlFilesByManualQuery();
-            RetrieveSqlResultByManualQuery();
+            if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
+            {
+                CreateSqlFilesByManualQuery_HANA();
+                RetrieveSqlResultByManualQuery_HANA();
+            }
+            else if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
+            {
+                CreateSqlFilesByManualQuery_MSSQL();
+                RetrieveSqlResultByManualQuery_MSSQL();
+                ConvertRSTFiles_MSSQL();
+            }
+            else
+            {
+                mLBLog.Items.Add("Invalid DB Type");
+                return;
+            }
             CompareSqlResultByManualQuery();
         }
 
@@ -515,6 +652,7 @@ namespace ResultCompareUI
 
             this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
 
+            QueryBox.Init(ConfigurationList.GetCurrent().GetDBType());
             DBCompareCombination();
             CompareResultDisplay();
             lastDisplayType = 0;
@@ -1160,6 +1298,12 @@ namespace ResultCompareUI
             {
                 mButtonCompare_Click(null, null);
             }
+        }
+
+        private void mPBLogo_Click(object sender, EventArgs e)
+        {
+            //test MSSQL.
+            //MSRstConverter.Convert(@".\abc.txt");
         }
     }
 }

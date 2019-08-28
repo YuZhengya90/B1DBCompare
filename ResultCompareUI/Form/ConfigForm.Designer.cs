@@ -168,7 +168,6 @@
             // mRBMSSQL
             // 
             this.mRBMSSQL.AutoSize = true;
-            this.mRBMSSQL.Enabled = false;
             this.mRBMSSQL.Location = new System.Drawing.Point(12, 116);
             this.mRBMSSQL.Name = "mRBMSSQL";
             this.mRBMSSQL.Size = new System.Drawing.Size(62, 17);

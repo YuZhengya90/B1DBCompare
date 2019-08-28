@@ -9,17 +9,19 @@ namespace ResultCompareUI
 {   
     class QueryBox
     {
-        private const string mQueryBoxPath = ".\\config\\querybox.txt";
+        private const string mHANAQueryBoxPath = ".\\config\\querybox_hana.txt";
+        private const string mMSSQLQueryBoxPath = ".\\config\\querybox_mssql.txt";
+        
 
         private static Dictionary<string, Dictionary<string, string>> mAllQueries;
 
-        public static void Init()
+        public static void Init(ConfigurationDBType type)
         {
             StreamReader sr = null;
 
             try
             {
-                sr = new StreamReader(mQueryBoxPath);
+                sr = new StreamReader(type == ConfigurationDBType.C_HANA ? mHANAQueryBoxPath : mMSSQLQueryBoxPath);
                 string content = sr.ReadToEnd();
 
                 mAllQueries = new Dictionary<string, Dictionary<string, string>>();
@@ -67,17 +69,16 @@ namespace ResultCompareUI
             // two parts DocNum and Order By.
             int selectCondPos = mAllQueries[bo][tableName].IndexOf("(?)");
             string sampleStr = mAllQueries[bo][tableName].Substring(0, selectCondPos);
-            int lastColon = sampleStr.LastIndexOf("\"");
-            int firstColon = sampleStr.Substring(0, lastColon - 1).LastIndexOf("\"");
-            string selectCond = mAllQueries[bo][tableName].Substring(firstColon + 1, lastColon - firstColon - 1);
+            int lastColon = sampleStr.LastIndexOf("=");
+            int firstColon = sampleStr.Substring(0, lastColon - 1).LastIndexOf("where");
+            string selectCond = mAllQueries[bo][tableName].Substring(firstColon + 5, lastColon - firstColon - 5).Trim(new char[]{' ','\"'});
 
             int startPos = mAllQueries[bo][tableName].LastIndexOf("Order By");
             if (startPos < 0)
             {
                 return selectCond;
             }
-            string orderCond = mAllQueries[bo][tableName].Substring(startPos + 8).Trim();
-            orderCond = orderCond.Replace("\"", "");
+            string orderCond = mAllQueries[bo][tableName].Substring(startPos + 8);
             orderCond = orderCond.Trim("\"; ".ToCharArray());
             return selectCond + "," + orderCond;
         }

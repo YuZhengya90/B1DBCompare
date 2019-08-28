@@ -52,9 +52,11 @@
             this.FILEToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openWorkingDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cleanWorkingDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenCaptureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.captureToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,8 +78,6 @@
             this.mRBShowIgnore = new System.Windows.Forms.RadioButton();
             this.mDGVCompareHeaderMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyTablesDiffsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.mDGVCompareList)).BeginInit();
             this.MenuStrip.SuspendLayout();
             this.mDGVCompareListMenu.SuspendLayout();
@@ -305,6 +305,11 @@
             this.cleanWorkingDirToolStripMenuItem.Text = "Clean Working Dir";
             this.cleanWorkingDirToolStripMenuItem.Click += new System.EventHandler(this.cleanWorkingDirToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(261, 6);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Enabled = false;
@@ -329,6 +334,11 @@
             this.captureToClipboardToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
             this.captureToClipboardToolStripMenuItem.Text = "Capture Screen to Clipboard";
             this.captureToClipboardToolStripMenuItem.Click += new System.EventHandler(this.captureToClipboardToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(261, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -438,6 +448,7 @@
             this.mPBLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mPBLogo.TabIndex = 1004;
             this.mPBLogo.TabStop = false;
+            this.mPBLogo.Click += new System.EventHandler(this.mPBLogo_Click);
             // 
             // mLBLogMenu
             // 
@@ -511,16 +522,6 @@
             this.copyTablesDiffsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.copyTablesDiffsToolStripMenuItem.Text = "Copy Table Diffs";
             this.copyTablesDiffsToolStripMenuItem.Click += new System.EventHandler(this.copyTablesDiffsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(261, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(261, 6);
             // 
             // MainForm
             // 
