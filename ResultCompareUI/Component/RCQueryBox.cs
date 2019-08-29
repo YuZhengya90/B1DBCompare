@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ResultCompareUI
 {   
-    class QueryBox
+    class RCQueryBox
     {
         private const string mHANAQueryBoxPath = ".\\config\\querybox_hana.txt";
         private const string mMSSQLQueryBoxPath = ".\\config\\querybox_mssql.txt";

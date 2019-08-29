@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ResultCompareUI
 {
-    class MSRstConverter
+    class RCMSSQLConverter
     {
         
 
@@ -87,10 +87,23 @@ namespace ResultCompareUI
             return outStr;
         }
 
+        // set quoto {Except Number NULL ..}
+        // add 0 in front of .x(number with dot)
         private static string SetQuotoIfString(string sample)
         {
             System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex(@"^[+-]?\d*[.]?\d*$");
             if (sample != "" && rex.IsMatch(sample))
+            {
+                if (sample.StartsWith("."))
+                {
+                    return "0" + sample;
+                }
+                else
+                {
+                    return sample;
+                }
+            }
+            else if (sample == "NULL")
             {
                 return sample;
             }

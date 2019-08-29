@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ResultCompareUI
 {
-    public class ConfigurationList
+    public class RCConfigurationList
     {
-        private static List<ConfigurationStruct> confList;
+        private static List<RCConfigurationStruct> confList;
         public static bool mListChanged = false;
         public static void ReSync()
         {
@@ -20,7 +20,7 @@ namespace ResultCompareUI
 
         }
 
-        public static List<ConfigurationStruct> GetList()
+        public static List<RCConfigurationStruct> GetList()
         {
             if (confList == null)
             {
@@ -30,7 +30,7 @@ namespace ResultCompareUI
             return confList;
         }
 
-        public static ConfigurationStruct GetByName(string confName)
+        public static RCConfigurationStruct GetByName(string confName)
         {
             foreach (var ci in confList)
             {
@@ -43,7 +43,7 @@ namespace ResultCompareUI
             return null;
         }
 
-        public static ConfigurationStruct GetCurrent()
+        public static RCConfigurationStruct GetCurrent()
         {
             return confList.Last();
         }
@@ -73,7 +73,7 @@ namespace ResultCompareUI
 
             if (found >= 0)
             {
-                ConfigurationStruct newCS = GetByName(confName).copy();
+                RCConfigurationStruct newCS = GetByName(confName).copy();
                 confList.RemoveAt(found);
                 confList.Add(newCS);
             }
@@ -98,7 +98,7 @@ namespace ResultCompareUI
                 }
             }
 
-            ConfigurationStruct cs = new ConfigurationStruct();
+            RCConfigurationStruct cs = new RCConfigurationStruct();
             cs.configurationName = confName.Trim();
             confList.Add(cs);
             mListChanged = true;
@@ -108,14 +108,14 @@ namespace ResultCompareUI
 
         public static void ReadFromFile()
         {
-            confList = new List<ConfigurationStruct>();
+            confList = new List<RCConfigurationStruct>();
             using (StreamReader sr = new StreamReader(".\\config\\database.ini", Encoding.Default))
             {
                 string content = sr.ReadToEnd();
                 List<string> eachConfig = content.Split(new String[]{"\n\n"}, StringSplitOptions.RemoveEmptyEntries).ToList();
                 foreach (string strConfig in eachConfig)
                 {
-                    ConfigurationStruct cs = new ConfigurationStruct();
+                    RCConfigurationStruct cs = new RCConfigurationStruct();
                     cs.ReadFromConfigFileString(strConfig);
                     confList.Add(cs);
                 }
@@ -142,7 +142,7 @@ namespace ResultCompareUI
         C_MSSQL = 1
     }
 
-    public class ConfigurationStruct
+    public class RCConfigurationStruct
     {
         public string configurationName {get;set;}
         public string configurationDescription { get; set; }
@@ -164,7 +164,7 @@ namespace ResultCompareUI
         private string ConnectionTimeout = "ConnectionTimeout";
         private string ExePath = "DBExePath";
 
-        public ConfigurationStruct()
+        public RCConfigurationStruct()
         {
             // currectly from static string;
             //configurationName = "Configuration-1";
@@ -180,9 +180,9 @@ namespace ResultCompareUI
             
         }
 
-        public ConfigurationStruct copy()
+        public RCConfigurationStruct copy()
         {
-            ConfigurationStruct newCs = new ConfigurationStruct();
+            RCConfigurationStruct newCs = new RCConfigurationStruct();
             newCs.configurationName = this.configurationName;
             newCs.configurationDescription = this.configurationDescription;
             newCs.configurationIPPort = this.configurationIPPort;

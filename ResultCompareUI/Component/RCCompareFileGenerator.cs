@@ -100,7 +100,7 @@ namespace ResultCompareUI.Component
         }
     }
 
-    class CompareFileGen
+    class RCCompareFileGenenrator
     {
         public void GenerateOFile(string leftFilePath, string rightFilePath, string ignoreCols, string keyCols, string outFilePath)
         {

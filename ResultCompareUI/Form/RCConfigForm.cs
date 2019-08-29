@@ -23,21 +23,21 @@ namespace ResultCompareUI
         private void InitConfigurationStruct()
         {
             mCBConfigName.Items.Clear();
-            mCBConfigName.Items.AddRange(ConfigurationList.GetNameList());
-            mCBConfigName.Text = ConfigurationList.GetCurrent().configurationName;
+            mCBConfigName.Items.AddRange(RCConfigurationList.GetNameList());
+            mCBConfigName.Text = RCConfigurationList.GetCurrent().configurationName;
             LoadConfigurationStruct();
         }
 
         private void LoadConfigurationStruct()
         {
-            mTBDesc.Text = ConfigurationList.GetCurrent().configurationDescription;
-            mTBTimeout.Text = ConfigurationList.GetCurrent().configurationConnectionTimeout.ToString();
-            mTBIP.Text = ConfigurationList.GetCurrent().configurationIPPort;
-            mTBSchema.Text = ConfigurationList.GetCurrent().configurationSchema;
-            mTBUserName.Text = ConfigurationList.GetCurrent().configurationUsername;
-            mTBPassword.Text = ConfigurationList.GetCurrent().configurationPassword;
+            mTBDesc.Text = RCConfigurationList.GetCurrent().configurationDescription;
+            mTBTimeout.Text = RCConfigurationList.GetCurrent().configurationConnectionTimeout.ToString();
+            mTBIP.Text = RCConfigurationList.GetCurrent().configurationIPPort;
+            mTBSchema.Text = RCConfigurationList.GetCurrent().configurationSchema;
+            mTBUserName.Text = RCConfigurationList.GetCurrent().configurationUsername;
+            mTBPassword.Text = RCConfigurationList.GetCurrent().configurationPassword;
 
-            if (ConfigurationList.GetCurrent().configurationDBType == ConfigurationDBType.C_HANA)
+            if (RCConfigurationList.GetCurrent().configurationDBType == ConfigurationDBType.C_HANA)
             {
                 mRBHANA.Checked = true;
             }
@@ -46,28 +46,28 @@ namespace ResultCompareUI
                 mRBMSSQL.Checked = true;
             }
 
-            mTBExePath.Text = ConfigurationList.GetCurrent().configurationExePath;
+            mTBExePath.Text = RCConfigurationList.GetCurrent().configurationExePath;
         }
 
         public void SaveConfigurationStruct()
         {
             //ConfigurationList.GetCurrent().configurationName = mTBConfigName.Text;
-            ConfigurationList.GetCurrent().configurationDescription = mTBDesc.Text;
-            ConfigurationList.GetCurrent().configurationConnectionTimeout = int.Parse(mTBTimeout.Text);
-            ConfigurationList.GetCurrent().configurationIPPort = mTBIP.Text;
-            ConfigurationList.GetCurrent().configurationSchema = mTBSchema.Text;
-            ConfigurationList.GetCurrent().configurationUsername = mTBUserName.Text;
-            ConfigurationList.GetCurrent().configurationPassword = mTBPassword.Text;
+            RCConfigurationList.GetCurrent().configurationDescription = mTBDesc.Text;
+            RCConfigurationList.GetCurrent().configurationConnectionTimeout = int.Parse(mTBTimeout.Text);
+            RCConfigurationList.GetCurrent().configurationIPPort = mTBIP.Text;
+            RCConfigurationList.GetCurrent().configurationSchema = mTBSchema.Text;
+            RCConfigurationList.GetCurrent().configurationUsername = mTBUserName.Text;
+            RCConfigurationList.GetCurrent().configurationPassword = mTBPassword.Text;
 
             if (mRBHANA.Checked)
             {
-                ConfigurationList.GetCurrent().configurationDBType = ConfigurationDBType.C_HANA;
+                RCConfigurationList.GetCurrent().configurationDBType = ConfigurationDBType.C_HANA;
             }
             else if (mRBMSSQL.Checked)
             {
-                ConfigurationList.GetCurrent().configurationDBType = ConfigurationDBType.C_MSSQL;
+                RCConfigurationList.GetCurrent().configurationDBType = ConfigurationDBType.C_MSSQL;
             }
-            ConfigurationList.GetCurrent().configurationExePath = mTBExePath.Text;
+            RCConfigurationList.GetCurrent().configurationExePath = mTBExePath.Text;
         }
 
         private void mRadioMSSQL_CheckedChanged(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace ResultCompareUI
         {
             if (mCBConfigName.DropDownStyle == ComboBoxStyle.Simple)
             {
-                if (ConfigurationList.NewAdd(mCBConfigName.Text))
+                if (RCConfigurationList.NewAdd(mCBConfigName.Text))
                 {
                     SaveConfigurationStruct();
                     formChanged = false;
@@ -109,12 +109,12 @@ namespace ResultCompareUI
             else if (mBtnSave.Text != "OK")
             {
                 SaveConfigurationStruct();
-                ConfigurationList.WriteToFile();
-                ConfigurationList.ReSync();
+                RCConfigurationList.WriteToFile();
+                RCConfigurationList.ReSync();
                 mBtnSave.Text = "OK";
                 mBtnCancel.Text = "CANCEL";
                 formChanged = false;
-                ConfigurationList.mListChanged = false;
+                RCConfigurationList.mListChanged = false;
             }
             else
             {
@@ -128,7 +128,7 @@ namespace ResultCompareUI
             {
                 mCBConfigName.DropDownStyle = ComboBoxStyle.DropDownList;
                 formChanged = false;
-                if (ConfigurationList.mListChanged)
+                if (RCConfigurationList.mListChanged)
                 {
                     mBtnSave.Text = "SAVE";
                     mBtnCancel.Text = "DISCARD";
@@ -140,7 +140,7 @@ namespace ResultCompareUI
                 }
                 
                 mBtnNew.Visible = true;
-                if (ConfigurationList.GetList().Count > 1)
+                if (RCConfigurationList.GetList().Count > 1)
                 {
                     mBtnDelete.Visible = true;
                 }
@@ -178,7 +178,7 @@ namespace ResultCompareUI
             ofd.Filter = "Executable File|*.exe";
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                ConfigurationList.GetCurrent().configurationExePath = ofd.FileName;
+                RCConfigurationList.GetCurrent().configurationExePath = ofd.FileName;
             }
         }
 
@@ -201,7 +201,7 @@ namespace ResultCompareUI
                 }
             }
 
-            ConfigurationList.SetCurrent(mCBConfigName.Text);
+            RCConfigurationList.SetCurrent(mCBConfigName.Text);
             LoadConfigurationStruct();
             formChanged = false;
         }
@@ -236,12 +236,12 @@ namespace ResultCompareUI
             if (DialogResult.Yes == MessageBox.Show("Sure to Delete ?", "Configuration Delete",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                ConfigurationList.RemoveCurrent();
+                RCConfigurationList.RemoveCurrent();
                 InitConfigurationStruct();
                 
             }
 
-            if (ConfigurationList.GetList().Count > 1)
+            if (RCConfigurationList.GetList().Count > 1)
             {
                 mBtnDelete.Visible = true;
             }
@@ -336,7 +336,7 @@ namespace ResultCompareUI
 
         private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ConfigurationList.ReSync();
+            RCConfigurationList.ReSync();
         }
     }
 }

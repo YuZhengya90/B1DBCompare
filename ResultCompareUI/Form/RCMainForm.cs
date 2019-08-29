@@ -17,7 +17,7 @@ namespace ResultCompareUI
         private string createFolderPathName = "";
         private const string pathConfig = ".\\config";
         private const string pathWorking = ".\\working";
-        private CompareResult readResult;
+        private RCCompareResult readResult;
 
         private bool fromUDFCompare = false;
         public string udfCompareQuery1 = "";
@@ -37,8 +37,8 @@ namespace ResultCompareUI
         public MainForm()
         {
             InitializeComponent();
-            ConfigurationList.GetList();
-            readResult = new CompareResult();
+            RCConfigurationList.GetList();
+            readResult = new RCCompareResult();
         }
 
         private void mButtonBrz_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace ResultCompareUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            QueryBox.Init(ConfigurationDBType.C_HANA);
+            RCQueryBox.Init(ConfigurationDBType.C_HANA);
             InitBusinessObjectComboBox();
             InitBusinessObjectSubTable();
             InitIgnoreListFilePath();
@@ -65,7 +65,7 @@ namespace ResultCompareUI
 
         private void InitBusinessObjectComboBox()
         {
-            mCBBO.Items.AddRange(QueryBox.GetAllBO());
+            mCBBO.Items.AddRange(RCQueryBox.GetAllBO());
             mCBBO.Text = mCBBO.Items[0].ToString();
         }
 
@@ -108,7 +108,7 @@ namespace ResultCompareUI
             DateTime dt = DateTime.Now;
             string strDT = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss");
             createFolderPathName = pathWorking + "\\" + strDT;
-            Command.Cmd("mkdir " + createFolderPathName, mLBLog);
+            RCComand.Cmd("mkdir " + createFolderPathName, mLBLog);
             saveToolStripMenuItem.Enabled = true;
         }
 
@@ -167,19 +167,19 @@ namespace ResultCompareUI
             // order by xxx;
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
             {
-                string exeCmdL = "echo set Schema \"" + ConfigurationList.GetCurrent().GetSchema() + "\";" +
-                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
+                string exeCmdL = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" +
+                    RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
                 
                 exeCmdL += " > \"" + getLeftSqlFilePathName(i) +"\"";
-                Command.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL, mLBLog);
 
                 mProgBar.Value += 1;
 
-                string exeCmdR = "echo set Schema \"" + ConfigurationList.GetCurrent().GetSchema() + "\";" +
-                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
+                string exeCmdR = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" +
+                    RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
 
                 exeCmdR += " > \"" + getRightSqlFilePathName(i) + "\"";
-                Command.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR, mLBLog);
 
                 mProgBar.Value += 1;
             }
@@ -191,18 +191,18 @@ namespace ResultCompareUI
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
             {
                 string exeCmdL = "echo " + 
-                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
+                    RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
 
                 exeCmdL += " > \"" + getLeftSqlFilePathName(i) + "\"";
-                Command.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL, mLBLog);
 
                 mProgBar.Value += 1;
 
                 string exeCmdR = "echo " + 
-                    QueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
+                    RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
 
                 exeCmdR += " > \"" + getRightSqlFilePathName(i) + "\"";
-                Command.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR, mLBLog);
 
                 mProgBar.Value += 1;
             }
@@ -210,14 +210,14 @@ namespace ResultCompareUI
 
         private void CreateSqlFilesByManualQuery_HANA()
         {
-            string exeCmdL = "echo set Schema \"" + ConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery1;
+            string exeCmdL = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery1;
             exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
-            Command.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL, mLBLog);
             mProgBar.Value += 1;
 
-            string exeCmdR = "echo set Schema \"" + ConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery2;
+            string exeCmdR = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery2;
             exeCmdR += " > \"" + getRightSqlFilePathName() + "\"";
-            Command.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR, mLBLog);
             mProgBar.Value += 1;
         }
 
@@ -225,33 +225,33 @@ namespace ResultCompareUI
         {
             string exeCmdL = "echo " + udfCompareQuery1;
             exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
-            Command.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL, mLBLog);
             mProgBar.Value += 1;
 
             string exeCmdR = "echo " + udfCompareQuery2;
             exeCmdR += " > \"" + getRightSqlFilePathName() + "\"";
-            Command.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR, mLBLog);
             mProgBar.Value += 1;
         }
 
         private void RetrieveSqlResult_HANA()
         {
-            string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
+            string hdbsql = "\"" + RCConfigurationList.GetCurrent().configurationExePath + "\"";
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
             {
-                string exeCmdL = hdbsql + " -n " + ConfigurationList.GetCurrent().GetIPPort() + " -u " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -p " + ConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName(i) + "\"" +
+                string exeCmdL = hdbsql + " -n " + RCConfigurationList.GetCurrent().GetIPPort() + " -u " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName(i) + "\"" +
-                    " -connecttimeout " + ConfigurationList.GetCurrent().GetConnectionTimout();
-                Command.Cmd(exeCmdL, mLBLog);
+                    " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
+                RCComand.Cmd(exeCmdL, mLBLog);
 
                 mProgBar.Value += 1;
 
-                string exeCmdR = hdbsql + " -n " + ConfigurationList.GetCurrent().GetIPPort() + " -u " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -p " + ConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName(i) + "\"" +
+                string exeCmdR = hdbsql + " -n " + RCConfigurationList.GetCurrent().GetIPPort() + " -u " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName(i) + "\"" +
-                    " -connecttimeout " + ConfigurationList.GetCurrent().GetConnectionTimout();
-                Command.Cmd(exeCmdR, mLBLog);
+                    " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
+                RCComand.Cmd(exeCmdR, mLBLog);
 
                 mProgBar.Value += 1;
             }
@@ -259,24 +259,24 @@ namespace ResultCompareUI
 
         private void RetrieveSqlResult_MSSQL()
         {
-            string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
+            string hdbsql = "\"" + RCConfigurationList.GetCurrent().configurationExePath + "\"";
             for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
             {
-                string exeCmdL = hdbsql + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName(i) + "\"" +
+                string exeCmdL = hdbsql + " -S " + RCConfigurationList.GetCurrent().GetIPPort() + " -U " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + RCConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName(i) + "\"" +
-                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() +
+                    " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() +
                     " -k2 ";
-                Command.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL, mLBLog);
 
                 mProgBar.Value += 1;
 
-                string exeCmdR = hdbsql + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName(i) + "\"" +
+                string exeCmdR = hdbsql + " -S " + RCConfigurationList.GetCurrent().GetIPPort() + " -U " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + RCConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName(i) + "\"" +
-                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() +
+                    " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() +
                     " -k2 ";
-                Command.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR, mLBLog);
 
                 mProgBar.Value += 1;
             }
@@ -284,42 +284,42 @@ namespace ResultCompareUI
 
         private void RetrieveSqlResultByManualQuery_HANA()
         {
-            string hdbsql = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
-            string exeCmdL = hdbsql + " -n " + ConfigurationList.GetCurrent().GetIPPort() + " -u " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -p " + ConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName() + "\"" +
+            string hdbsql = "\"" + RCConfigurationList.GetCurrent().configurationExePath + "\"";
+            string exeCmdL = hdbsql + " -n " + RCConfigurationList.GetCurrent().GetIPPort() + " -u " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName() + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
-                    " -connecttimeout " + ConfigurationList.GetCurrent().GetConnectionTimout();
-            Command.Cmd(exeCmdL, mLBLog);
+                    " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
+            RCComand.Cmd(exeCmdL, mLBLog);
 
             mProgBar.Value += 1;
 
-            string exeCmdR = hdbsql + " -n " + ConfigurationList.GetCurrent().GetIPPort() + " -u " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -p " + ConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName() + "\"" +
+            string exeCmdR = hdbsql + " -n " + RCConfigurationList.GetCurrent().GetIPPort() + " -u " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName() + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName() + "\"" +
-                    " -connecttimeout " + ConfigurationList.GetCurrent().GetConnectionTimout();
-            Command.Cmd(exeCmdR, mLBLog);
+                    " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
+            RCComand.Cmd(exeCmdR, mLBLog);
 
             mProgBar.Value += 1;
         }
 
         private void RetrieveSqlResultByManualQuery_MSSQL()
         {
-            string sqlcmd = "\"" + ConfigurationList.GetCurrent().configurationExePath + "\"";
-            string exeCmdL = sqlcmd + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName() + "\"" +
+            string sqlcmd = "\"" + RCConfigurationList.GetCurrent().configurationExePath + "\"";
+            string exeCmdL = sqlcmd + " -S " + RCConfigurationList.GetCurrent().GetIPPort() + " -U " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + RCConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getLeftSqlFilePathName() + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
-                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() + 
+                    " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() + 
                     " -k2 ";
-            Command.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL, mLBLog);
 
             mProgBar.Value += 1;
 
-            string exeCmdR = sqlcmd + " -S " + ConfigurationList.GetCurrent().GetIPPort() + " -U " + ConfigurationList.GetCurrent().GetUserName() +
-                    " -P " + ConfigurationList.GetCurrent().GetPassword() + " -d " + ConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName() + "\"" +
+            string exeCmdR = sqlcmd + " -S " + RCConfigurationList.GetCurrent().GetIPPort() + " -U " + RCConfigurationList.GetCurrent().GetUserName() +
+                    " -P " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + RCConfigurationList.GetCurrent().GetSchema() + " -i " + "\"" + getRightSqlFilePathName() + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName() + "\"" +
-                    " -t " + ConfigurationList.GetCurrent().GetConnectionTimout() + 
+                    " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() + 
                     " -k2 ";
-            Command.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR, mLBLog);
 
             mProgBar.Value += 1;
         }
@@ -329,7 +329,7 @@ namespace ResultCompareUI
             var files = Directory.GetFiles(createFolderPathName, "*.RST");
             foreach(var file in files)
             {
-                MSRstConverter.Convert(file);
+                RCMSSQLConverter.Convert(file);
             }
         }
 
@@ -397,15 +397,15 @@ namespace ResultCompareUI
                     string ignoreStr = "";
                     if (ignoreFiles.ContainsKey(tableName))
                     {
-                        ignoreStr += ignoreFiles[tableName] + IgnoreAlready.GetByTable(tableName);
+                        ignoreStr += ignoreFiles[tableName] + RCIgnoreAlready.GetByTable(tableName);
                     }
 
-                    CompareFileGen cFileGen = new CompareFileGen();
+                    RCCompareFileGenenrator cFileGen = new RCCompareFileGenenrator();
                     cFileGen.GenerateOFile(
                         getLeftRetrieveFileName(i),
                         getRightRetrieveFileName(i),
                         ignoreStr,
-                        QueryBox.GetTableKeyOrderByBOTable(mCBBO.Text, tableName),
+                        RCQueryBox.GetTableKeyOrderByBOTable(mCBBO.Text, tableName),
                         getCompareResultFileName(i)
                         );
                 }
@@ -424,18 +424,18 @@ namespace ResultCompareUI
                  " -l " + "\"" + getLeftRetrieveFileName() + "\"" +
                  " -r " + "\"" + getRightRetrieveFileName() + "\"" +
                  " -o " + "\"" + getCompareResultFileName() + "\"";
-            Command.Cmd(exeCmd, mLBLog);
+            RCComand.Cmd(exeCmd, mLBLog);
         }
         
         public void DBCompareCombination()
         {
             CreateClickFolder();
-            if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
+            if (RCConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
             {
                 CreateSqlFiles_HANA();
                 RetrieveSqlResult_HANA();
             }
-            else if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
+            else if (RCConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
             {
                 CreateSqlFiles_MSSQL();
                 RetrieveSqlResult_MSSQL();
@@ -453,12 +453,12 @@ namespace ResultCompareUI
         public void DBCompareCombinationAdvanced()
         {
             CreateClickFolder();
-            if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
+            if (RCConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_HANA)
             {
                 CreateSqlFilesByManualQuery_HANA();
                 RetrieveSqlResultByManualQuery_HANA();
             }
-            else if (ConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
+            else if (RCConfigurationList.GetCurrent().GetDBType() == ConfigurationDBType.C_MSSQL)
             {
                 CreateSqlFilesByManualQuery_MSSQL();
                 RetrieveSqlResultByManualQuery_MSSQL();
@@ -472,9 +472,9 @@ namespace ResultCompareUI
             CompareSqlResultByManualQuery();
         }
 
-        private CompareResult ReadCompareResult()
+        private RCCompareResult ReadCompareResult()
         {
-            CompareResult compareResult = new CompareResult();
+            RCCompareResult compareResult = new RCCompareResult();
             StreamReader sr = null;
             try
             {
@@ -513,9 +513,9 @@ namespace ResultCompareUI
             return compareResult;
         }
 
-        private CompareResult ReadManualCompareResult()
+        private RCCompareResult ReadManualCompareResult()
         {
-            CompareResult compareResult = new CompareResult();
+            RCCompareResult compareResult = new RCCompareResult();
             StreamReader sr = null;
             try
             {
@@ -652,7 +652,7 @@ namespace ResultCompareUI
 
             this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
 
-            QueryBox.Init(ConfigurationList.GetCurrent().GetDBType());
+            RCQueryBox.Init(RCConfigurationList.GetCurrent().GetDBType());
             DBCompareCombination();
             CompareResultDisplay();
             lastDisplayType = 0;
@@ -672,7 +672,7 @@ namespace ResultCompareUI
         private void MatchBOWithSubTables(string bo)
         {
             mLVSubTable.Items.Clear();
-            string[] tables = QueryBox.GetTablesByBO(bo);
+            string[] tables = RCQueryBox.GetTablesByBO(bo);
             for (int i = 0; i < tables.Count(); ++i )
             {
                 ListViewItem lvi = new ListViewItem();
@@ -686,9 +686,9 @@ namespace ResultCompareUI
         private void MatchBOWithLabels(string bo)
         {
             mLB1.Text =
-            QueryBox.GetTableKeyOrderByBOTable(bo, mLVSubTable.Items[0].Text).Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList()[0];
+            RCQueryBox.GetTableKeyOrderByBOTable(bo, mLVSubTable.Items[0].Text).Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList()[0];
             mLB2.Text =
-            QueryBox.GetTableKeyOrderByBOTable(bo, mLVSubTable.Items[0].Text).Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList()[0];
+            RCQueryBox.GetTableKeyOrderByBOTable(bo, mLVSubTable.Items[0].Text).Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList()[0];
         }
 
         private void mComBoxBO_SelectedIndexChanged(object sender, EventArgs e)
@@ -1106,7 +1106,7 @@ namespace ResultCompareUI
         {
             string fileName = Path.GetFileName(createFolderPathName);
             string startCmd = "start .\\working\\" + fileName;
-            Command.Cmd(startCmd, mLBLog);
+            RCComand.Cmd(startCmd, mLBLog);
         }
 
         private void DelectDir(string srcPath)
@@ -1125,7 +1125,7 @@ namespace ResultCompareUI
                         DirectoryInfo subdir = new DirectoryInfo(i.FullName);
                         subdir.Delete(true);
                     }
-                    else
+                    else if (!i.FullName.Contains(".gitignore"))
                     {
                         File.Delete(i.FullName);
                     }

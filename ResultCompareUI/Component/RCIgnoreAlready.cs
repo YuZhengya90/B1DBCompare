@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ResultCompareUI
 {
     // ignore the hard code columns inside.
-    class IgnoreAlready
+    class RCIgnoreAlready
     {
         private static Dictionary<string, string> igA;
         private static void Init()

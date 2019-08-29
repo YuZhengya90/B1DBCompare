@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ResultCompareUI
 {
-    class Command
+    class RCComand
     {
         public static string[] Cmd(string exeQuery, ListBox mListBoxLog)
         {

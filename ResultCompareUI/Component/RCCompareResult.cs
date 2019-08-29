@@ -256,10 +256,10 @@ namespace ResultCompareUI
         }
     }
 
-    class CompareResult
+    class RCCompareResult
     {
         public List<CompareTable> tableGroup { get; set; }
-        public CompareResult()
+        public RCCompareResult()
         {
             tableGroup = new List<CompareTable>();
         }
