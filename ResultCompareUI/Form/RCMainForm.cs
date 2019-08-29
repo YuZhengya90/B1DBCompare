@@ -39,6 +39,7 @@ namespace ResultCompareUI
             InitializeComponent();
             RCConfigurationList.GetList();
             readResult = new RCCompareResult();
+            RCLogMessage.Instance().SetBox(mLBLog);
         }
 
         private void mButtonBrz_Click(object sender, EventArgs e)
@@ -108,7 +109,7 @@ namespace ResultCompareUI
             DateTime dt = DateTime.Now;
             string strDT = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss");
             createFolderPathName = pathWorking + "\\" + strDT;
-            RCComand.Cmd("mkdir " + createFolderPathName, mLBLog);
+            RCComand.Cmd("mkdir " + createFolderPathName);
             saveToolStripMenuItem.Enabled = true;
         }
 
@@ -171,7 +172,7 @@ namespace ResultCompareUI
                     RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
                 
                 exeCmdL += " > \"" + getLeftSqlFilePathName(i) +"\"";
-                RCComand.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL);
 
                 mProgBar.Value += 1;
 
@@ -179,7 +180,7 @@ namespace ResultCompareUI
                     RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
 
                 exeCmdR += " > \"" + getRightSqlFilePathName(i) + "\"";
-                RCComand.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR);
 
                 mProgBar.Value += 1;
             }
@@ -194,7 +195,7 @@ namespace ResultCompareUI
                     RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBLeftKey.Text);
 
                 exeCmdL += " > \"" + getLeftSqlFilePathName(i) + "\"";
-                RCComand.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL);
 
                 mProgBar.Value += 1;
 
@@ -202,7 +203,7 @@ namespace ResultCompareUI
                     RCQueryBox.GetQueryByBOTable(mCBBO.Text, mLVSubTable.CheckedItems[i].Text, mTBRightKey.Text);
 
                 exeCmdR += " > \"" + getRightSqlFilePathName(i) + "\"";
-                RCComand.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR);
 
                 mProgBar.Value += 1;
             }
@@ -212,12 +213,12 @@ namespace ResultCompareUI
         {
             string exeCmdL = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery1;
             exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
-            RCComand.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL);
             mProgBar.Value += 1;
 
             string exeCmdR = "echo set Schema \"" + RCConfigurationList.GetCurrent().GetSchema() + "\";" + udfCompareQuery2;
             exeCmdR += " > \"" + getRightSqlFilePathName() + "\"";
-            RCComand.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR);
             mProgBar.Value += 1;
         }
 
@@ -225,12 +226,12 @@ namespace ResultCompareUI
         {
             string exeCmdL = "echo " + udfCompareQuery1;
             exeCmdL += " > \"" + getLeftSqlFilePathName() + "\"";
-            RCComand.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL);
             mProgBar.Value += 1;
 
             string exeCmdR = "echo " + udfCompareQuery2;
             exeCmdR += " > \"" + getRightSqlFilePathName() + "\"";
-            RCComand.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR);
             mProgBar.Value += 1;
         }
 
@@ -243,7 +244,7 @@ namespace ResultCompareUI
                     " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName(i) + "\"" +
                     " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
-                RCComand.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL);
 
                 mProgBar.Value += 1;
 
@@ -251,7 +252,7 @@ namespace ResultCompareUI
                     " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName(i) + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName(i) + "\"" +
                     " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
-                RCComand.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR);
 
                 mProgBar.Value += 1;
             }
@@ -267,7 +268,7 @@ namespace ResultCompareUI
                     " -o " + "\"" + getLeftRetrieveFileName(i) + "\"" +
                     " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() +
                     " -k2 ";
-                RCComand.Cmd(exeCmdL, mLBLog);
+                RCComand.Cmd(exeCmdL);
 
                 mProgBar.Value += 1;
 
@@ -276,7 +277,7 @@ namespace ResultCompareUI
                     " -o " + "\"" + getRightRetrieveFileName(i) + "\"" +
                     " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() +
                     " -k2 ";
-                RCComand.Cmd(exeCmdR, mLBLog);
+                RCComand.Cmd(exeCmdR);
 
                 mProgBar.Value += 1;
             }
@@ -289,7 +290,7 @@ namespace ResultCompareUI
                     " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getLeftSqlFilePathName() + "\"" +
                     " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
                     " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
-            RCComand.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL);
 
             mProgBar.Value += 1;
 
@@ -297,7 +298,7 @@ namespace ResultCompareUI
                     " -p " + RCConfigurationList.GetCurrent().GetPassword() + " -d " + "DBA" + " -I " + "\"" + getRightSqlFilePathName() + "\"" +
                     " -o " + "\"" + getRightRetrieveFileName() + "\"" +
                     " -connecttimeout " + RCConfigurationList.GetCurrent().GetConnectionTimout();
-            RCComand.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR);
 
             mProgBar.Value += 1;
         }
@@ -310,7 +311,7 @@ namespace ResultCompareUI
                     " -o " + "\"" + getLeftRetrieveFileName() + "\"" +
                     " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() + 
                     " -k2 ";
-            RCComand.Cmd(exeCmdL, mLBLog);
+            RCComand.Cmd(exeCmdL);
 
             mProgBar.Value += 1;
 
@@ -319,7 +320,7 @@ namespace ResultCompareUI
                     " -o " + "\"" + getRightRetrieveFileName() + "\"" +
                     " -t " + RCConfigurationList.GetCurrent().GetConnectionTimout() + 
                     " -k2 ";
-            RCComand.Cmd(exeCmdR, mLBLog);
+            RCComand.Cmd(exeCmdR);
 
             mProgBar.Value += 1;
         }
@@ -356,7 +357,7 @@ namespace ResultCompareUI
             }
             catch(Exception)
             {
-                mLBLog.Items.Add("Take care of that IgnoreFile is empty");
+                RCLogMessage.Instance().Log("Take care of that IgnoreFile is empty");
             }
 
             finally
@@ -411,7 +412,7 @@ namespace ResultCompareUI
                 }
                 catch(Exception ex)
                 {
-                    mLBLog.Items.Add(ex.Message);
+                    RCLogMessage.Instance().Log(ex.Message);
                 }                
 
                 mProgBar.Value += 1;
@@ -424,7 +425,7 @@ namespace ResultCompareUI
                  " -l " + "\"" + getLeftRetrieveFileName() + "\"" +
                  " -r " + "\"" + getRightRetrieveFileName() + "\"" +
                  " -o " + "\"" + getCompareResultFileName() + "\"";
-            RCComand.Cmd(exeCmd, mLBLog);
+            RCComand.Cmd(exeCmd);
         }
         
         public void DBCompareCombination()
@@ -443,7 +444,7 @@ namespace ResultCompareUI
             }
             else
             {
-                mLBLog.Items.Add("Invalid DB Type");
+                RCLogMessage.Instance().Log("Invalid DB Type");
                 return;
             }
             
@@ -466,7 +467,7 @@ namespace ResultCompareUI
             }
             else
             {
-                mLBLog.Items.Add("Invalid DB Type");
+                RCLogMessage.Instance().Log("Invalid DB Type");
                 return;
             }
             CompareSqlResultByManualQuery();
@@ -502,7 +503,7 @@ namespace ResultCompareUI
             }
             catch(Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }
             finally
             {
@@ -538,7 +539,7 @@ namespace ResultCompareUI
             }
             catch (Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }
             finally
             {
@@ -558,21 +559,34 @@ namespace ResultCompareUI
             mDGVCompareList.Columns.Clear();
             mDGVCompareList.Rows.Clear();
 
-            if (displayType == 0)
+            if (mRBShowCompare.Checked)
             {
-                mLBCompareList.Text = compareList;
-                readResult = ReadCompareResult();
-            }
-            else if (displayType == 1)
-            {
-                mLBCompareList.Text = manualCompareList;
-                readResult = ReadManualCompareResult();
+                if (displayType == 0)
+                {
+                    mLBCompareList.Text = compareList;
+                    readResult = ReadCompareResult();
+                }
+                else if (displayType == 1)
+                {
+                    mLBCompareList.Text = manualCompareList;
+                    readResult = ReadManualCompareResult();
+                }
             }
             else
             {
                 mLBCompareList.Text = compareList;
                 return;
             }
+
+            // empty hide
+            //if (readResult.IsEmpty() && (displayType == 0 || displayType == 1))
+            //{
+            //    mDGVCompareList.Hide();
+            //}
+            //else
+            //{
+            //    mDGVCompareList.Show();
+            //}
                 
             int maxCount = readResult.GetMaxColumnCount();
 
@@ -642,7 +656,7 @@ namespace ResultCompareUI
             mLBLog.Items.Clear();
             if (!CheckReady())
             {
-                mLBLog.Items.Add("Compare Object Key is Empty, please input first.");
+                RCLogMessage.Instance().Log("Compare Object Key is Empty, please input first.");
                 return;
             }
 
@@ -777,12 +791,12 @@ namespace ResultCompareUI
 
                     sw = new StreamWriter(sfd.FileName);
                     sw.Write(content);
-                    mLBLog.Items.Add("Save successfully, path \"" + sfd.FileName + "\"");
+                    RCLogMessage.Instance().Log("Save successfully, path \"" + sfd.FileName + "\"");
                 }
             }
             catch(Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }   
             finally
             {
@@ -936,7 +950,7 @@ namespace ResultCompareUI
             }
             catch(Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }            
         }
 
@@ -993,7 +1007,7 @@ namespace ResultCompareUI
 
             catch(Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }        
         }
 
@@ -1041,7 +1055,7 @@ namespace ResultCompareUI
 
             catch(Exception ex)
             {
-                mLBLog.Items.Add(ex.Message);
+                RCLogMessage.Instance().Log(ex.Message);
             }
         }
 
@@ -1106,7 +1120,7 @@ namespace ResultCompareUI
         {
             string fileName = Path.GetFileName(createFolderPathName);
             string startCmd = "start .\\working\\" + fileName;
-            RCComand.Cmd(startCmd, mLBLog);
+            RCComand.Cmd(startCmd);
         }
 
         private void DelectDir(string srcPath)
@@ -1135,7 +1149,7 @@ namespace ResultCompareUI
             }
             catch (Exception e)
             {
-                mLBLog.Items.Add(e.Message);
+                RCLogMessage.Instance().Log(e.Message);
             }
         }
 
@@ -1150,12 +1164,12 @@ namespace ResultCompareUI
             }
         }
 
-        private void mRBShowCompare_CheckedChanged(object sender, EventArgs e)
+        private void mRBShowCompare_Clicked(object sender, EventArgs e)
         {
             CompareResultDisplay(lastDisplayType);
         }
 
-        private void mRBShowIgnore_CheckedChanged(object sender, EventArgs e)
+        private void mRBShowIgnore_Clicked(object sender, EventArgs e)
         {
             IgnoreFileDisplay();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResultCompareUI.Component;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ResultCompareUI
 {
     class RCComand
     {
-        public static string[] Cmd(string exeQuery, ListBox mListBoxLog)
+        public static string[] Cmd(string exeQuery)
         {
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -35,11 +36,9 @@ namespace ResultCompareUI
             while (p.StandardError.Peek() > -1)
             {
                 x.Add(p.StandardError.ReadLine());
-                if (mListBoxLog != null)
-                {
-                    string errMsg = MsgHandle(x.Last() + "    Internal Command = [" + exeQuery + "]", exeQuery);
-                    mListBoxLog.Items.Add(errMsg);
-                }
+                
+                string errMsg = MsgHandle(x.Last() + "    Internal Command = [" + exeQuery + "]", exeQuery);
+                RCLogMessage.Instance().Log(errMsg);
             }
 
             p.WaitForExit();

@@ -86,6 +86,7 @@
     <Compile Include="Component\RCCommand.cs" />
     <Compile Include="Component\RCCompareResult.cs" />
     <Compile Include="Component\RCCompareFileGenerator.cs" />
+    <Compile Include="Component\RCLogMessage.cs" />
     <Compile Include="Form\RCConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>

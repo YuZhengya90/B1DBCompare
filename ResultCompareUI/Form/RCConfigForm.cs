@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,8 +89,15 @@ namespace ResultCompareUI
         {
             if (mCBConfigName.DropDownStyle == ComboBoxStyle.Simple)
             {
-                if (RCConfigurationList.NewAdd(mCBConfigName.Text))
+                if (!File.Exists(mTBExePath.Text))
                 {
+                    MessageBox.Show(mRBHANA.Checked ? "can't find hdbsql.exe in [" : "can't find sqlcmd.exe in [" + mLBExePath.Text + "]", "Invalid Executable File",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (RCConfigurationList.NewAdd(mCBConfigName.Text))
+                {  
                     SaveConfigurationStruct();
                     formChanged = false;
                     mCBConfigName.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -98,7 +106,6 @@ namespace ResultCompareUI
                     mBtnNew.Visible = true;
                     mBtnDelete.Visible = true;
                     InitConfigurationStruct();
-                    
                 }
                 else
                 {
@@ -331,6 +338,13 @@ namespace ResultCompareUI
                 mBtnSave.Text = "SAVE";
                 mBtnCancel.Text = "DISCARD";
                 formChanged = true;
+            }
+            else
+            {
+                if (mRBHANA.Checked == true)
+                    mTBExePath.Text = RCConfigurationStruct.hdbsqlPathDefault;
+                else
+                    mTBExePath.Text = RCConfigurationStruct.SqlcmdPathDefault;
             }
         }
 

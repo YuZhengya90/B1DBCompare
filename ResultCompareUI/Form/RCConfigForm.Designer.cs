@@ -47,7 +47,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.mBtnSave = new System.Windows.Forms.Button();
             this.mBtnCancel = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.mLBExePath = new System.Windows.Forms.Label();
             this.mTBExePath = new System.Windows.Forms.TextBox();
             this.mBtnBrz = new System.Windows.Forms.Button();
             this.mCBConfigName = new System.Windows.Forms.ComboBox();
@@ -230,12 +230,12 @@
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 256);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 202;
-            this.label5.Text = "DB Client File";
+            this.mLBExePath.AutoSize = true;
+            this.mLBExePath.Location = new System.Drawing.Point(9, 256);
+            this.mLBExePath.Name = "label5";
+            this.mLBExePath.Size = new System.Drawing.Size(70, 13);
+            this.mLBExePath.TabIndex = 202;
+            this.mLBExePath.Text = "DB Client File";
             // 
             // mTBExePath
             // 
@@ -297,7 +297,7 @@
             this.Controls.Add(this.mCBConfigName);
             this.Controls.Add(this.mBtnBrz);
             this.Controls.Add(this.mTBExePath);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.mLBExePath);
             this.Controls.Add(this.mBtnCancel);
             this.Controls.Add(this.mBtnSave);
             this.Controls.Add(this.label4);
@@ -348,7 +348,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button mBtnSave;
         private System.Windows.Forms.Button mBtnCancel;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label mLBExePath;
         private System.Windows.Forms.TextBox mTBExePath;
         private System.Windows.Forms.Button mBtnBrz;
         private System.Windows.Forms.ComboBox mCBConfigName;

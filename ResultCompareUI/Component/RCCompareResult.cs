@@ -264,6 +264,11 @@ namespace ResultCompareUI
             tableGroup = new List<CompareTable>();
         }
 
+        public bool IsEmpty()
+        {
+            return tableGroup.Count == 0;
+        }
+
         public CompareTable GetCompareTableByName(string name)
         {
             foreach(var tg in tableGroup)

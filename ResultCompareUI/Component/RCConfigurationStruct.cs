@@ -164,6 +164,11 @@ namespace ResultCompareUI
         private string ConnectionTimeout = "ConnectionTimeout";
         private string ExePath = "DBExePath";
 
+
+        public static string SqlcmdPathDefault = @"C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\SQLCMD.EXE";
+        public static string hdbsqlPathDefault = @"C:\Program Files (x86)\SAP\hdbclient\hdbsql.exe";
+
+
         public RCConfigurationStruct()
         {
             // currectly from static string;
