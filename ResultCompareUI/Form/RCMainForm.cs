@@ -477,9 +477,10 @@ namespace ResultCompareUI
         {
             RCCompareResult compareResult = new RCCompareResult();
             StreamReader sr = null;
-            try
+
+            for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
             {
-                for (int i = 0; i < mLVSubTable.CheckedItems.Count; ++i)
+                try
                 {
                     using (sr = new StreamReader(getCompareResultFileName(i), Encoding.Default))
                     {
@@ -498,17 +499,12 @@ namespace ResultCompareUI
                             }
                         }
                         compareResult.tableGroup.Add(ct);
-                    }                   
+                    }      
                 }
-            }
-            catch(Exception ex)
-            {
-                RCLogMessage.Instance().Log(ex.Message);
-            }
-            finally
-            {
-                //if (sr != null)
-                //    sr.Close();
+                catch(Exception ex)
+                {
+                    RCLogMessage.Instance().Log(ex.Message);
+                }           
             }
 
             return compareResult;
